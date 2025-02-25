@@ -3,24 +3,17 @@ from datetime import datetime, UTC
 
 from app.core.database import Base, engine
 from sqlalchemy import Column, Integer, Boolean, String, DateTime
+from pydantic import BaseModel, EmailStr, Field, constr, field_validator
+from app.routes.user import router as user_router
 
 Base.metadata.create_all(bind=engine)
 app = FastAPI()
+app.include_router(user_router, prefix="/auth", tags=["User"])
 
 
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
-
-
-@app.post("/register")
-def register_user():
-    return {"message": "User registered successfully"}
-
-
-@app.post("/token")
-async def login_for_access_token():
-    return {"message": "User logged in successfully"}
 
 
 class User(Base):
@@ -35,3 +28,14 @@ class User(Base):
     verification_code = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.now(UTC))
 
+
+class UserBase(BaseModel):
+    username: constr(min_length=3, max_length=50, pattern=r"^[a-zA-Z0-9_]+$")
+    email: EmailStr
+
+
+class UserCreate(UserBase):
+    password: constr(min_length=8, max_length=64)
+
+
+# TODO: Add custom validator
