@@ -24,7 +24,10 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = []
+dependencies = [
+  "fastapi[all]",
+  "pre-commit>=4.1.0",
+]
 
 [project.urls]
 Documentation = "https://github.com/Ugur Emre Dogan/app#readme"
