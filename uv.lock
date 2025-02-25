@@ -31,6 +31,7 @@ source = { editable = "." }
 dependencies = [
     { name = "fastapi", extra = ["all"] },
     { name = "pre-commit" },
+    { name = "python-dotenv" },
     { name = "sqlalchemy" },
 ]
 
@@ -38,6 +39,7 @@ dependencies = [
 requires-dist = [
     { name = "fastapi", extras = ["all"] },
     { name = "pre-commit", specifier = ">=4.1.0" },
+    { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "sqlalchemy", specifier = ">=2.0.38" },
 ]
 
