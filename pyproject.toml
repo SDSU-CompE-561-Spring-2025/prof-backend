@@ -25,9 +25,11 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
+  "bandit>=1.8.3",
   "fastapi[all]",
   "pre-commit>=4.1.0",
   "python-dotenv>=1.0.1",
+  "ruff>=0.9.7",
   "sqlalchemy>=2.0.38",
 ]
 
