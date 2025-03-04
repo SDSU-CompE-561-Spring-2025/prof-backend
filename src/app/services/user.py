@@ -1,9 +1,10 @@
+from sqlalchemy.orm import Session
+
+from app.core.auth import get_password_hash
 from app.core.config import get_settings
 from app.core.security import verify_password
-from app.schemas.user import UserCreate
-from sqlalchemy.orm import Session
-from app.core.auth import get_password_hash
 from app.models.user import User
+from app.schemas.user import UserCreate
 
 settings = get_settings()
 
@@ -31,4 +32,9 @@ def authenticate_user(db: Session, username: str, password: str):
         return False
     if not verify_password(password, user.password_hash):
         return False
+    return user
+
+
+def get_user_by_username(db: Session, username: str):
+    user = db.query(User).filter(User.username == username).first()
     return user
